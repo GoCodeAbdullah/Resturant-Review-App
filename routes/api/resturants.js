@@ -42,7 +42,7 @@ router.delete("/:id",async function (req,res,next) {
 
 // Edit Resturants
 
-router.put("/:id",validateResturantasync, function(req,res,next){
+router.put("/:id",validateResturant, async function(req,res,next){
   let rest =await Resturant.findById({_id:req.params.id});
   if(!rest) return res.status(400).send("User not Exist");  
 
