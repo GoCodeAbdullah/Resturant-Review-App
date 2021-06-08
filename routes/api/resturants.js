@@ -2,9 +2,14 @@ var express = require('express');
 var router = express.Router();
 const {Resturant} = require("../../models/resturants");
 const validateResturant = require("../../middlewares/validateResturant");
+const validateReview = require("../../middlewares/validateResturant");
+const auth = require("../../middlewares/auth");
+const { Users } = require('../../models/users');
+const { x } = require('@hapi/joi');
 
 /* GET resturant */
-router.get('/', async function(req, res, next) {
+router.get('/',auth, async function(req, res, next) {
+    console.log(req.user);
     let rest =await Resturant.find();
     return res.send(rest);
 
@@ -53,9 +58,31 @@ router.put("/:id",validateResturant, async function(req,res,next){
 
   rest.save();
 
-  res.send("Edited Sucessfully");
+  return res.send("Edited Sucessfully");
 
 })
 
+
+router.put("/review/:id",auth,async function(req,res,next){
+  
+  let rest =await Resturant.findById({_id:req.params.id});
+  if(!rest) return res.status(400).send("User not Exist"); 
+
+
+  let review ={
+      customerId: req.user._id,
+      rating: req.body.rating,
+      review: req.body.review
+  }
+
+  console.log("Here");
+
+  rest.reviews.push(review);
+
+  await rest.save();
+  
+  return res.send("Reviewed Successfully");
+
+})
   
 module.exports = router;

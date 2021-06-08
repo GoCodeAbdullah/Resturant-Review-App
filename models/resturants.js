@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const Joi = require("@hapi/joi");
 
+var reviewSchema = mongoose.Schema({
+    customerId: String,
+    rating: Number,
+    review: String
+})
+
 var resturantSchema = mongoose.Schema({
     name: String,
     description: String,
     city: String,
-    address: String
+    address: String,
+    reviews: [reviewSchema]
 })
+
+
 
 
 var resturants = mongoose.model("Resturants",resturantSchema);
@@ -22,5 +31,18 @@ function validateResturant(data){
     return scheme.validate(data);
 }
 
+function validateReview(data){
+    const scheme = Joi.object({
+        customerId: Joi.string().required(),
+        rating: Joi.number().required(),
+        review: Joi.string().required(),
+        
+    });
+
+    return scheme.validate(data);
+}
+
+
 module.exports.Resturant = resturants;
 module.exports.validateResturants= validateResturant;
+module.exports.validateReviews= validateReview;

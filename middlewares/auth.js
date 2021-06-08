@@ -8,7 +8,7 @@ async function auth(req,res,next){
 
 
     try {
-        let user = jwt.verify(token,config.get("jwtprivatekey"));
+        let user = jwt.verify(token,config.get("jwtwebtoken"));
         req.user = await Users.findById(user._id);
         
     } catch (error) {

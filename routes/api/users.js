@@ -52,7 +52,7 @@ router.post('/signup',validateSignUp, async function(req, res, next) {
   users.password = await bcrypt.hash(users.password,salt);
 
   await users.save();
-  res.send(users);
+  return res.send(users);
 });
 
 router.post("/login",validateLogIn,async function(req,res,next){
@@ -64,7 +64,7 @@ router.post("/login",validateLogIn,async function(req,res,next){
 
   let token = jwt.sign({_id:use._id, name:use.name},config.get("jwtwebtoken"));
 
-  res.send(token);
+  return res.send(token);
 })
 
 
