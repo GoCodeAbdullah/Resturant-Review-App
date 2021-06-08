@@ -1,3 +1,5 @@
 {
-    "db":"mongodb://localhost/resturant-review"
+    "db":"mongodb://localhost/resturant-review",
+    "jwtwebtoken": "jwtPrivate"
+
 }
