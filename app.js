@@ -9,8 +9,10 @@ var config = require('config');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/api/users');
 var resturantRouter = require("./routes/api/resturants");
+var cors = require('cors')
 
 var app = express();
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -5,7 +5,11 @@ var userSchema = mongoose.Schema({
     name: String,
     phone: Number,
     email: String,
-    password: String
+    password: String,
+    role:{
+        type: String,
+        default:"User"
+    }
 });
 
 var user = mongoose.model("Users",userSchema);
@@ -16,10 +20,6 @@ function validateSignup(data){
         phone: Joi.number().required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(3).required(),
-        role:{
-            type: String,
-            default:"User"
-        }
     });
 
     return scheme.validate(data);
