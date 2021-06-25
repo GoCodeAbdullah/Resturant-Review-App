@@ -34,9 +34,7 @@ const Register = (props) => {
       <Grid container spacing={4} className={classes.grids}>
         <Grid item xs={4}></Grid>
         <Grid item xs={4}>
-          <div className={classes.logoDiv}>
-            <img src={logo} className="App-logo" alt="logo" width="120" />
-          </div>
+          <h1>Register</h1>
 
           <TextField
             label="Name"

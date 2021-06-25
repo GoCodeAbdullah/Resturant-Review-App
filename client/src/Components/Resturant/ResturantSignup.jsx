@@ -1,9 +1,8 @@
-import { Grid, TextField } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import logo from "../../logo.svg";
-import userService from "../../services/UserService";
+import resturantService from "../../services/ResturantService";
+import { Grid, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -23,33 +22,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = (props) => {
+const ResturantSignup = (props) => {
   const classes = useStyles();
-  const [email, setEmail] = React.useState("amcas@b.com");
-  const [password, setPassword] = React.useState("aaa");
+  const [name, setName] = React.useState("Abdullah");
+  const [description, setDescription] = React.useState("amcas@b.com");
+  const [city, setCity] = React.useState("Lahore");
+  const [address, setAddress] = React.useState("aaa");
   return (
     <div style={{ backgroundColor: "#bbb" }}>
       <Grid container spacing={4} className={classes.grids}>
         <Grid item xs={4}></Grid>
         <Grid item xs={4}>
-          <h1>Login</h1>
+          <h1>Resturant Signup</h1>
 
           <TextField
             label="Name"
             fullWidth
-            value={email}
+            value={name}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setName(e.target.value);
+            }}
+          />
+          <TextField
+            label="Description"
+            fullWidth
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+          <TextField
+            label="City"
+            fullWidth
+            value={city}
+            onChange={(e) => {
+              setCity(e.target.value);
             }}
           />
           <br />
           <TextField
-            label="Password"
-            type="password"
+            label="Address"
             fullWidth
-            value={password}
+            value={address}
             onChange={(e) => {
-              setPassword(e.target.value);
+              setAddress(e.target.value);
             }}
           />
           <br />
@@ -58,24 +74,20 @@ const Login = (props) => {
             color="primary"
             className={classes.login}
             onClick={(e) => {
-              userService
-                .login(email, password)
+              resturantService
+                .register(name,description,city,address)
                 .then((data) => {
                   console.log(data);
                   window.location.href ="/";
                 })
                 .catch((err) => {
-                  console.log(err);
+                  console.log(err.response.data);
                 });
             }}
           >
-            Login
+            Signup
           </Button>
           <br />
-
-          <p className={classes.small}>
-            Not have account? <a href="/register">Register now</a>
-          </p>
         </Grid>
         <Grid item xs={4}></Grid>
       </Grid>
@@ -83,4 +95,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default ResturantSignup;

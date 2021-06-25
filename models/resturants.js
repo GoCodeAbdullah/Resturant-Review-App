@@ -3,7 +3,10 @@ const Joi = require("@hapi/joi");
 
 var reviewSchema = mongoose.Schema({
     customerId: String,
-    rating: Number,
+    rating: {
+        type:Number,
+        default:0
+    },
     review: String
 })
 

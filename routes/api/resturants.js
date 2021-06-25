@@ -8,13 +8,25 @@ const { Users } = require('../../models/users');
 const { x } = require('@hapi/joi');
 
 /* GET resturant */
-router.get('/',auth, async function(req, res, next) {
+router.get('/', async function(req, res, next) {
     console.log(req.user);
     let rest =await Resturant.find();
     return res.send(rest);
 
 });
+/* GET resturant */
+router.get('/:id', async function(req, res, next) {
+  try {
+    var rest = await Resturant.findById(req.params.id);
+    if (!rest) {
+      res.status(400).send("Given ID is not found");
+    }
+    return res.send(rest);
+  } catch (err) {
+    res.status(400).send("invalid ID");
+  }
 
+});
 /* Post Resturant */
 router.post('/',validateResturant, async function(req, res, next) {
   let rest = new Resturant();
@@ -63,14 +75,23 @@ router.put("/:id",validateResturant, async function(req,res,next){
 })
 
 
-router.put("/review/:id",auth,async function(req,res,next){
+router.post("/review/:id",async function(req,res,next){
   
   let rest =await Resturant.findById({_id:req.params.id});
   if(!rest) return res.status(400).send("User not Exist"); 
+  console.log(rest.reviews)
+
+  rest.reviews.map((resturant)=>{
+    if(resturant.customerId==req.body.id)
+    {
+      res.status(400).send("User Already Review")
+    }
+
+  })
 
 
   let review ={
-      customerId: req.user._id,
+      customerId: req.body.id,
       rating: req.body.rating,
       review: req.body.review
   }

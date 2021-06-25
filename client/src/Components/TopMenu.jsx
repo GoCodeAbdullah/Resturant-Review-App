@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     background:"#333"
   },
   logoImg: {
-    width: "100px",
+    width: "75px",
   },
   gridRight:{
       display:"flex",
@@ -32,6 +32,8 @@ const TopMenu = () => {
               />
             </Grid>
             <Grid item xs={6} className={classes.gridRight}>
+              <a href="/resturant"> Resturants</a>
+              <a href="/resturant/signup"> Resturants Signup</a>
                 <SignButtons/>
             </Grid>
           </Grid>
