@@ -1,5 +1,5 @@
 import GenericServices from "./GenericService";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 class UserService extends GenericServices {
   constructor() {
@@ -19,28 +19,28 @@ class UserService extends GenericServices {
     });
   register = (name, email, password,phone) =>
     this.post("users/signup", { name, email, password, phone });
-  // logout = () => {
-  //   localStorage.removeItem("token");
-  // };
+  logout = () => {
+    localStorage.removeItem("token");
+  };
 
-//   isLoggedIn = () => {
-//     return localStorage.getItem("token") ? true : false;
-//   };
+  isLoggedIn = () => {
+    return localStorage.getItem("token") ? true : false;
+  };
 
-//   getLoggedinUser = () => {
-//     try {
-//       const jwt = localStorage.getItem("token");
-//       return jwt_decode(jwt);
-//     } catch (ex) {
-//       return null;
-//     }
-//   };
-//   isAdmin = () => {
-//     if (this.isLoggedIn()) {
-//       if (this.getLoggedinUser().role == "Admin") return true;
-//       else return false;
-//     } else return false;
-//   };
+  getLoggedinUser = () => {
+    try {
+      const jwt = localStorage.getItem("token");
+      return jwt_decode(jwt);
+    } catch (ex) {
+      return null;
+    }
+  };
+  isAdmin = () => {
+    if (this.isLoggedIn()) {
+      if (this.getLoggedinUser().role == "Admin") return true;
+      else return false;
+    } else return false;
+  };
 }
 
 let userService = new UserService();

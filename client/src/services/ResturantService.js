@@ -10,7 +10,8 @@ class ResturantService extends GenericServices {
   register = (name, description, city, address) =>
     this.post("resturant/", { name, description, city, address });
   getSingleResturant = (id) => this.get("resturant/" + id);
-  giveReview = (id,rating,review)=>this.post("resturant/review/"+id,{id,rating,review})
+  giveReview = (id,rating,review)=>this.post("resturant/review/"+id,{id,rating,review});
+  getResturantReview =(id)=>this.get("resturant/review/"+id);
 }
 
 let resturantService = new ResturantService();

@@ -32,8 +32,6 @@ const TopMenu = () => {
               />
             </Grid>
             <Grid item xs={6} className={classes.gridRight}>
-              <a href="/resturant"> Resturants</a>
-              <a href="/resturant/signup"> Resturants Signup</a>
                 <SignButtons/>
             </Grid>
           </Grid>
