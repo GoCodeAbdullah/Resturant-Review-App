@@ -1,5 +1,5 @@
 {
-    "db":"mongodb://localhost/resturant-review",
+    "db":"mongodb+srv://abdullah:qwerty@123@cluster0.cn2dr.mongodb.net/ResturantApp?retryWrites=true&w=majority",
     "jwtwebtoken": "jwtPrivate"
 
 }
