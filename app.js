@@ -1,10 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
+
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
 var config = require('config');
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/api/users');
@@ -13,6 +15,12 @@ var cors = require('cors')
 
 var app = express();
 app.use(cors())
+
+const path = require('path')// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'client/build')))// Anything that doesn't match the above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
